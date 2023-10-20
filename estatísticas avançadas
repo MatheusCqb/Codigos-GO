@@ -1,0 +1,81 @@
+//Calculadora estatísticas avançadas 
+
+
+
+
+
+
+package main
+
+import (
+	"fmt"
+	"sort"
+)
+
+func main() {
+	// Dados de exemplo
+	dados := []float64{1, 2, 2, 3, 3, 3, 4, 5, 5}
+
+	// Calcular a média
+	media := calcularMedia(dados)
+
+	// Calcular a mediana
+	mediana := calcularMediana(dados)
+
+	// Calcular a moda
+	moda := calcularModa(dados)
+
+	// Exibir os resultados
+	fmt.Printf("Média: %f\n", media)
+	fmt.Printf("Mediana: %f\n", mediana)
+	fmt.Printf("Moda: %v\n", moda)
+}
+
+func calcularMedia(dados []float64) float64 {
+	soma := 0.0
+	for _, valor := range dados {
+		soma += valor
+	}
+	return soma / float64(len(dados))
+}
+
+func calcularMediana(dados []float64) float64 {
+	// Antes de calcular a mediana, é importante ordenar os dados
+	sort.Float64s(dados)
+
+	// Verificar se o número de dados é par ou ímpar
+	if len(dados)%2 == 0 {
+		// Se for par, a mediana é a média dos dois valores do meio
+		meio := len(dados) / 2
+		mediana := (dados[meio-1] + dados[meio]) / 2
+		return mediana
+	} else {
+		// Se for ímpar, a mediana é o valor do meio
+		meio := len(dados) / 2
+		return dados[meio]
+	}
+}
+
+func calcularModa(dados []float64) []float64 {
+	// Criar um mapa para contar a frequência de cada valor
+	frequencia := make(map[float64]int)
+
+	// Calcular a frequência de cada valor
+	for _, valor := range dados {
+		frequencia[valor]++
+	}
+
+	// Encontrar o(s) valor(es) com a maior frequência
+	var moda []float64
+	maiorFrequencia := 0
+	for valor, freq := range frequencia {
+		if freq > maiorFrequencia {
+			moda = []float64{valor}
+			maiorFrequencia = freq
+		} else if freq == maiorFrequencia {
+			moda = append(moda, valor)
+		}
+	}
+
+	return moda
+}
