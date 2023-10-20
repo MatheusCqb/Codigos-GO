@@ -1,0 +1,44 @@
+//Indice de lasper O índice de preço de Laspeyres trata-se de uma média ponderada de relativos, tendo os fatores de ponderação calculados a partir de preços e de quantidades da época básica.
+
+
+
+
+package main
+
+import "fmt"
+
+func main() {
+	// Dados de preços e quantidades no período base (t-1)
+	precosBase := []float64{10, 20, 30}
+	quantidadesBase := []float64{2, 3, 4}
+
+	// Dados de preços e quantidades no período atual (t)
+	precosAtual := []float64{12, 22, 32}
+	quantidadesAtual := []float64{2, 3, 4}
+
+	// Calcular o Índice de Laspeyres
+	indiceLaspeyres := calcularIndiceLaspeyres(precosBase, quantidadesBase, precosAtual, quantidadesAtual)
+
+	// Imprimir o resultado
+	fmt.Printf("O Índice de Laspeyres é: %f\n", indiceLaspeyres)
+}
+
+func calcularIndiceLaspeyres(precosBase, quantidadesBase, precosAtual, quantidadesAtual []float64) float64 {
+	somaBase := 0.0
+	somaAtual := 0.0
+
+	// Calcular a soma dos gastos no período base (t-1)
+	for i := 0; i < len(precosBase); i++ {
+		somaBase += precosBase[i] * quantidadesBase[i]
+	}
+
+	// Calcular a soma dos gastos no período atual (t)
+	for i := 0; i < len(precosAtual); i++ {
+		somaAtual += precosAtual[i] * quantidadesBase[i] // Usando as quantidades do período base
+	}
+
+	// Calcular o Índice de Laspeyres
+	indiceLaspeyres := (somaAtual / somaBase) * 100
+
+	return indiceLaspeyres
+}
