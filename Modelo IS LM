@@ -1,0 +1,37 @@
+// IS / LM / BP 
+// O Modelo IS/LM, Modelo Keynesiano Generalizado (MKG), ou ainda Modelo Hicks-Hansen, é um instrumento para fins de análise macroeconómica de âmbito didático, cuja representação num espaço cartesiano procura ilustrar os pares ordenados de taxa de juro nominal e renda, em que temos equilíbrio de curto prazo no Mercado de Bens e Serviços e no Mercado Monetário económico. 
+// É uma formalização matemática iniciada por John Richard Hicks baseada largamente na teoria de John Maynard Keynes.[1] A sigla IS/LM do modelo provém do inglês Investment Saving / Liquidity preference Money supply. A extensão do modelo IS/LM para uma economia aberta é conhecida por IS/LM/BP ou Modelo Mundell-Fleming. 
+
+
+
+
+
+package main
+
+import "fmt"
+
+func main() {
+	// Suponha que temos os seguintes dados fictícios:
+	P1 := 10.0    // Preço do bem 1 no período t
+	Q1 := 100.0   // Quantidade do bem 1 no período t
+	P2 := 8.0     // Preço do bem 2 no período t
+	Q2 := 120.0   // Quantidade do bem 2 no período t
+	P1_0 := 9.0   // Preço do bem 1 no período t-1
+	Q1_0 := 110.0 // Quantidade do bem 1 no período t-1
+	P2_0 := 7.0   // Preço do bem 2 no período t-1
+	Q2_0 := 130.0 // Quantidade do bem 2 no período t-1
+
+	// Calcular IS (Índice de Laspeyres)
+	IS := (P1*Q1 + P2*Q2) / (P1_0*Q1_0 + P2_0*Q2_0) * 100
+
+	// Calcular LM (Índice de Média Aritmética)
+	LM := (P1/P1_0 + P2/P2_0) / 2 * 100
+
+	// Calcular BP (Índice de Balassa-Pereira)
+	BP := (P1*Q1 - P1_0*Q1_0 + P2*Q2 - P2_0*Q2_0) / (P1_0*Q1_0 + P2_0*Q2_0) * 100
+
+	// Imprimir os resultados
+	fmt.Printf("IS: %f\n", IS)
+	fmt.Printf("LM: %f\n", LM)
+	fmt.Printf("BP: %f\n", BP)
+}
